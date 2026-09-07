@@ -1,0 +1,13 @@
+{
+  "name": "coderabbit-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Scratch repo for testing a local CodeRabbit install",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
