@@ -1,3 +1,5 @@
+import { applyDiscount, bestDiscount, type Discount } from "./discount.js"
+
 export interface CartLine {
 	readonly sku: string
 	readonly unitPriceCents: number
@@ -19,4 +21,17 @@ export function itemCount(lines: readonly CartLine[]): number {
 
 export function formatCents(cents: number): string {
 	return `$${(cents / 100).toFixed(2)}`
+}
+
+/** Checkout total in dollars, applying the best available discount. */
+export function checkoutTotal(
+	lines: CartLine[],
+	discounts: Discount[],
+): number {
+	const subtotal = subtotalCents(lines)
+	const discount = bestDiscount(discounts, subtotal)
+	if (discount == null) {
+		return subtotal / 100
+	}
+	return applyDiscount(subtotal, discount)
 }
